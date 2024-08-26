@@ -232,11 +232,11 @@
         "which-key-nvim": "which-key-nvim"
       },
       "locked": {
-        "lastModified": 1724674778,
-        "narHash": "sha256-3iI21lzzJ6tqh6baNixBPqW3FYOWp/asPYen6l44xVs=",
+        "lastModified": 1724681703,
+        "narHash": "sha256-7WyPLvYfjHdMCEx/xhiA6yjGbTOtneIsAiwD0YisB48=",
         "owner": "coopetal",
         "repo": "kickstart-nix.nvim",
-        "rev": "6a9636bfa8928879e500f2eae4b071cb6f643ec7",
+        "rev": "527007ab38f537a16335d457dec4a44b56b17de4",
         "type": "github"
       },
       "original": {
@@ -307,11 +307,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1724224976,
-        "narHash": "sha256-Z/ELQhrSd7bMzTO8r7NZgi9g5emh+aRKoCdaAv5fiO0=",
+        "lastModified": 1724479785,
+        "narHash": "sha256-pP3Azj5d6M5nmG68Fu4JqZmdGt4S4vqI5f8te+E/FTw=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "c374d94f1536013ca8e92341b540eba4c22f9c62",
+        "rev": "d0e1602ddde669d5beb01aec49d71a51937ed7be",
         "type": "github"
       },
       "original": {
