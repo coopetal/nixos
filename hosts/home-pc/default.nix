@@ -10,7 +10,9 @@
       ./hardware-configuration.nix
 
       # Hardware modules
-      # TODO: Add hardware modules
+      inputs.hardware.nixosModules.common-cpu-amd
+      inputs.hardware.nixosModules.common-gpu-amd
+      inputs.hardware.nixosModules.common-pc-ssd
       
       # Core configuration
       ../common/core
