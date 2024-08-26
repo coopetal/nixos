@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ inputs, outputs, config, lib, pkgs, ... }:
 
 {
   imports =
@@ -20,6 +20,25 @@
       # Users to create
       ../common/users/coopetal
     ];
+
+  nixpkgs = {
+    # You can add overlays here
+    overlays = [
+    # Add overlays your own flake exports (from overlays and pkgs dir):
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
+
+    # You can also add overlays exported from other flakes:
+
+    # Or define it inline, for example:
+    # (final: prev: {
+    #   hi = final.hello.overrideAttrs (oldAttrs: {
+    #     patches = [ ./change-hello-to-hi.patch ];
+    #   });
+    # })
+    ];
+  };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   hardware.enableAllFirmware = true;
@@ -180,10 +199,21 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment = {
+  # TODO: minimise gnome installation
+    gnome.excludePackages = with pkgs.gnome; [
+      gnome-terminal
+      gnome-software
+      gnome-music
+      # gnome-photos
+      simple-scan
+      totem
+      epiphany
+      geary
+    ];
     pathsToLink = [ "/share/zsh" ];
     systemPackages = with pkgs; [
       firefox
-      # libgcc
+      meslo-lgs-nf
       nerdfonts
       sops
       tree
@@ -193,10 +223,10 @@
   };
 
   programs = {
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-    };
+    # neovim = {
+    #   enable = true;
+    #   defaultEditor = true;
+    # };
     # nushell.enable = true;
     zsh.enable = true;
   };
@@ -228,8 +258,13 @@
   };
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [
+  3389  # Gnome Remote Desktop
+  ];
+  networking.firewall.allowedUDPPorts = [
+  3389  # Gnome Remote Desktop
+  ];
+
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 

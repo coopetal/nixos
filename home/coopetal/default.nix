@@ -1,11 +1,32 @@
 
-{ config, pkgs, lib, ... }:
+{ inputs, outputs, config, pkgs, lib, ... }:
 
 {
   imports = [
     # Core configuration
-    # common/core  # TODO: add core module
+    common/core
   ];
+
+  nixpkgs = {
+    # You can add overlays here
+    overlays = [
+    # Add overlays your own flake exports (from overlays and pkgs dir):
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
+
+    # You can also add overlays exported from other flakes:
+    inputs.neovim.overlays.default
+
+    # Or define it inline, for example:
+    # (final: prev: {
+    #   hi = final.hello.overrideAttrs (oldAttrs: {
+    #     patches = [ ./change-hello-to-hi.patch ];
+    #   });
+    # })
+    ];
+  };
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "coopetal";
@@ -40,10 +61,10 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
 
-    alacritty
     bat
     eza
     fd
+    fzf
     # git-crypt
     gnumake  # LunarVim dependency
     # gnupg
@@ -51,6 +72,7 @@
     lunarvim
     neofetch
     nodejs_22  # LunarVim dependency
+    nvim-pkg  # Personal Neovim configuration using Kickstart-nix.nvim flake template
     python312
     python312Packages.pip
     ripgrep
@@ -74,20 +96,7 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-
-    # ".config/nvim" = {
-    #   source = ./nvim;
-    #   recursive = true;
-    # };
   };
-
-  # TODO: Neovim
-  # xdg.configFile = {
-  #   "nvim" = {
-  #     source = ./nvim;
-  #     recursive = true;
-  #   };
-  # };
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
@@ -109,20 +118,93 @@
     EDITOR = "lvim";  # Set default editor
   };
 
-  # home.file = {
-    # ".config/nvim".source = fetchFromGitHub {
-    #    owner = "coopetal";
-    #    repo = "nvim";
-    #    rev = "1860184";
-    #    sha256 = "1xfax18y4ddafzmwqp8qfs6k34nh163bwjxb7llvls5hxr79vr9s";
-    #    leaveDotGit = true;
-    # };
-  # }
+  # dconf.settings = {
+  #   "/org/gnome/settings-daemon/plugins/media-keys" = {
+  #     home = "<Super>f";
+  #     calculator = "<Super>c";
+  #     www = "<Super>b";
+  #   };
+  #   "/org/gnome/desktop/wm/keybindings" = {
+  #     switch-to-workspace-left = "<Super>q";
+  #     switch-to-workspace-right = "<Super>w";
+  #     close = "<Super>x";
+  #   };
+  #   "/org/gnome/shell/keybindings" = {
+  #     toggle-overview = "<Super>d";
+  #   };
+  #   "/org/gnome/settings-daemon/plugins/media-keys" = {
+  #     custom-keybindings = [
+  #       "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+  #     ];
+  #   };
+  #   "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+  #     binding = "<Super>t";
+  #     command = "alacritty";
+  #     name = "Launch terminal";
+  #   };
+  # };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   programs = {
+    alacritty = {
+      enable = true;
+      settings = {
+        # Auy Dark theme
+        colors.primary = {
+          background = "#0A0E14";
+          foreground = "#B3B1AD";
+        };
+        colors.normal = {
+          black   = "#01060E";
+          red     = "#EA6C73";
+          green   = "#91B362";
+          yellow  = "#F9AF4F";
+          blue    = "#53BDFA";
+          magenta = "#FAE994";
+          cyan    = "#90E1C6";
+          white   = "#C7C7C7";
+        };
+        colors.bright = {
+          black   = "#686868";
+          red     = "#F07178";
+          green   = "#C2D94C";
+          yellow  = "#FFB454";
+          blue    = "#59C2FF";
+          magenta = "#FFEE99";
+          cyan    = "#95E6CB";
+          white   = "#FFFFFF";
+        };
+
+        # Options
+        font.normal = {
+          family = "MesloLGS Nerd Font";
+        };
+        keyboard.bindings = [
+          {
+            action = "CreateNewWindow";
+            key = "T";
+            mods = "Control | Shift";
+          }
+        ];
+        window = {
+          decorations = "none";
+          opacity = 0.95;
+          title = "Alacritty";
+          decorations_theme_variant = "dark";
+        };
+        window.class = {
+          general = "Alacritty";
+          instance = "Alacritty";
+        };
+        window.padding = {
+          x = 8;
+          y = 8;
+        };
+      };
+    };
+
     carapace.enable = true;
 
     git = {
@@ -144,76 +226,6 @@
         };
       };
     };
-
-    # neovim = {
-    #   enable = true;
-    #   defaultEditor = true;
-    #   withNodeJs = true;
-    #   withPython3 = true;
-    #   withRuby = true;
-    #   extraConfig = ''
-    #     set number relativenumber
-    #     '';
-    #   # extraLuaConfig = ''
-    #   #   require('lazy').setup({
-    #   #     {
-    #   #       "nvim-treesitter/nvim-treesitter",
-    #   #       config = function(_, opts)
-    #   #         opts.auto_install = false
-    #   #         opts.ensure_installed = {}
-    #   #         return opts
-    #   #       end,
-    #   #     },
-    #   #   }
-    #   # '';
-    #   # extraPackages = with pkgs; [
-    #     # Formatters
-    #     # gofumpt
-    #     # goimports-reviser
-    #     # golines
-
-    #     # # LSP
-    #     # gopls
-
-    #     # Tools
-    #     # go
-    #     # gcc
-    #   # ];
-    #   plugins = with pkgs.vimPlugins; [
-    #   #   # Languages
-
-    #   #   # Formatters
-
-    #   #   # LSP
-
-    #   #   # Treesitter
-    #     nvim-treesitter.withAllGrammars
-    #   #   Tagbar
-    #   #   treesj
-
-    #   #   # Git
-    #   #   git-blame-nvim
-    #   #   gitignore-nvim
-
-    #   #   # Tools
-    #   #   chadtree
-    #   #   indent-blankline-nvim
-    #   #   telescope-nvim
-    #   #   toggleterm-nvim
-	   #  #   vim-sleuth
-    #   #   which-key-nvim
-
-    #   #   # Motions
-    #   #   leap-nvim
-    #   #   nvim-surround
-    #   ];
-    #   # List of plugins to add:
-    #   # vimtex  # LaTeX
-    #   # leap-spooky.nvim
-    #   # speeddating.vim
-
-
-    # };
 
     # nushell = {
     #   enable = true;

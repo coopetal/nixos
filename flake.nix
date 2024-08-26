@@ -25,6 +25,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Kickstart-nix Neovim flake
+    neovim = {
+      url = "github:coopetal/kickstart-nix.nvim";
+      # inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     # Private secrets repo
     # Authenticate via ssh and use shallow clone
     mysecrets = {
