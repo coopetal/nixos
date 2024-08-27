@@ -2,52 +2,62 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ inputs, outputs, config, lib, pkgs, ... }:
+{
+  inputs,
+  outputs,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
 
-      # Hardware modules
-      inputs.hardware.nixosModules.common-cpu-amd
-      inputs.hardware.nixosModules.common-gpu-amd
-      inputs.hardware.nixosModules.common-pc-ssd
-      
-      # Core configuration
-      ../common/core
+    # Hardware modules
+    inputs.hardware.nixosModules.common-cpu-amd
+    inputs.hardware.nixosModules.common-gpu-amd
+    inputs.hardware.nixosModules.common-pc-ssd
 
-      # Optional configurations
+    # Core configuration
+    ../common/core
 
-      # Users to create
-      ../common/users/coopetal
-    ];
+    # Optional configurations
+
+    # Users to create
+    ../common/users/coopetal
+  ];
 
   nixpkgs = {
     # You can add overlays here
     overlays = [
-    # Add overlays your own flake exports (from overlays and pkgs dir):
+      # Add overlays your own flake exports (from overlays and pkgs dir):
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
 
-    # You can also add overlays exported from other flakes:
+      # You can also add overlays exported from other flakes:
 
-    # Or define it inline, for example:
-    # (final: prev: {
-    #   hi = final.hello.overrideAttrs (oldAttrs: {
-    #     patches = [ ./change-hello-to-hi.patch ];
-    #   });
-    # })
+      # Or define it inline, for example:
+      # (final: prev: {
+      #   hi = final.hello.overrideAttrs (oldAttrs: {
+      #     patches = [ ./change-hello-to-hi.patch ];
+      #   });
+      # })
     ];
   };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   hardware.enableAllFirmware = true;
   nixpkgs.config.allowUnfree = true;
-  
+
   # Enable Flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -56,7 +66,7 @@
   networking.hostName = "home-pc"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "Europe/London";
@@ -79,7 +89,7 @@
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
-  
+
   # Limit the number of generations to keep
   boot.loader.systemd-boot.configurationLimit = 10;
   # boot.loader.grub.configurationLimit = 10;
@@ -109,15 +119,13 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
-  # Persist selected root files and options
+  # Persistence settings
   environment.etc = {
     nixos.source = "/persist/etc/nixos";
     "NetworkManager/system-connections".source = "/persist/etc/NetworkManager/system-connections";
     adjtime.source = "/persist/etc/adjtime";
     NIXOS.source = "/persist/etc/NIXOS";
     machine-id.source = "/persist/etc/machine-id";
-    # ssh.source = "/persist/etc/ssh";
-    # ssl.source = "/persist/etc/ssl";
   };
   systemd.tmpfiles.rules = [
     "L /var/lib/NetworkManager/secret_key - - - - /persist/var/lib/NetworkManager/secret_key"
@@ -132,13 +140,11 @@
   environment.persistence."/persist" = {
     # hideMounts = true;
     directories = [
-      "/var/lib/sops-nix"
       "/etc/ssh"
-      # "/etc/ssl"
+      "/var/lib/sops-nix"
+      "/var/lib/nixos"
     ];
-    files = [
-      "/var/lib/sops-nix-key.txt"
-    ];
+    files = [ "/var/lib/sops-nix-key.txt" ];
   };
 
   # Rollback root to empty state
@@ -191,7 +197,7 @@
   #       isNormalUser = true;
   #       extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
   #       # packages = with pkgs; [
-  #       # 
+  #       #
   #       # ];
   #       shell = pkgs.zsh;
   #     };
@@ -201,7 +207,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment = {
-  # TODO: minimise gnome installation
+    # TODO: minimise gnome installation
     gnome.excludePackages = with pkgs.gnome; [
       gnome-terminal
       gnome-software
@@ -261,10 +267,10 @@
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [
-  3389  # Gnome Remote Desktop
+    3389 # Gnome Remote Desktop
   ];
   networking.firewall.allowedUDPPorts = [
-  3389  # Gnome Remote Desktop
+    3389 # Gnome Remote Desktop
   ];
 
   # Or disable the firewall altogether.
@@ -295,4 +301,3 @@
   system.stateVersion = "24.05"; # Did you read the comment?
 
 }
-

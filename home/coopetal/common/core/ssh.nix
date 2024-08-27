@@ -1,4 +1,4 @@
-{ outputs. lib, ... }:
+{ outputs, lib, ... }:
 
 {
   programs.ssh = {
@@ -8,9 +8,7 @@
       "git-repositories" = {
         host = "gitlab.com github.com";
         identitiesOnly = true;
-        identityFile = [
-          "~/.ssh/id_ed25519"
-        ];
+        identityFile = [ "~/.ssh/id_ed25519" ];
       };
     };
   };
