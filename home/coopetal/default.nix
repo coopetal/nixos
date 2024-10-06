@@ -1,5 +1,11 @@
-
-{ inputs, outputs, config, pkgs, lib, ... }:
+{
+  inputs,
+  outputs,
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [
@@ -10,20 +16,20 @@
   nixpkgs = {
     # You can add overlays here
     overlays = [
-    # Add overlays your own flake exports (from overlays and pkgs dir):
+      # Add overlays your own flake exports (from overlays and pkgs dir):
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
 
-    # You can also add overlays exported from other flakes:
-    inputs.neovim.overlays.default
+      # You can also add overlays exported from other flakes:
+      inputs.neovim.overlays.default
 
-    # Or define it inline, for example:
-    # (final: prev: {
-    #   hi = final.hello.overrideAttrs (oldAttrs: {
-    #     patches = [ ./change-hello-to-hi.patch ];
-    #   });
-    # })
+      # Or define it inline, for example:
+      # (final: prev: {
+      #   hi = final.hello.overrideAttrs (oldAttrs: {
+      #     patches = [ ./change-hello-to-hi.patch ];
+      #   });
+      # })
     ];
   };
 
@@ -66,19 +72,20 @@
     fd
     fzf
     # git-crypt
-    gnumake  # LunarVim dependency
+    gnumake # LunarVim dependency
     # gnupg
     just
     lunarvim
     neofetch
-    nodejs_22  # LunarVim dependency
-    nvim-pkg  # Personal Neovim configuration using Kickstart-nix.nvim flake template
+    nodejs_22 # LunarVim dependency
+    nvim-pkg # Personal Neovim configuration using Kickstart-nix.nvim flake template
     python312
     python312Packages.pip
+    qbittorrent
     ripgrep
-    rustup  # LunarVim dependency
-    unzip  # LunarVim dependency
-    
+    rustup # LunarVim dependency
+    unzip # LunarVim dependency
+
     # Fonts
     # jetbrains-mono
   ];
@@ -115,7 +122,7 @@
   #  /etc/profiles/per-user/chech/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    EDITOR = "lvim";  # Set default editor
+    EDITOR = "lvim"; # Set default editor
   };
 
   # dconf.settings = {
@@ -157,24 +164,24 @@
           foreground = "#B3B1AD";
         };
         colors.normal = {
-          black   = "#01060E";
-          red     = "#EA6C73";
-          green   = "#91B362";
-          yellow  = "#F9AF4F";
-          blue    = "#53BDFA";
+          black = "#01060E";
+          red = "#EA6C73";
+          green = "#91B362";
+          yellow = "#F9AF4F";
+          blue = "#53BDFA";
           magenta = "#FAE994";
-          cyan    = "#90E1C6";
-          white   = "#C7C7C7";
+          cyan = "#90E1C6";
+          white = "#C7C7C7";
         };
         colors.bright = {
-          black   = "#686868";
-          red     = "#F07178";
-          green   = "#C2D94C";
-          yellow  = "#FFB454";
-          blue    = "#59C2FF";
+          black = "#686868";
+          red = "#F07178";
+          green = "#C2D94C";
+          yellow = "#FFB454";
+          blue = "#59C2FF";
           magenta = "#FFEE99";
-          cyan    = "#95E6CB";
-          white   = "#FFFFFF";
+          cyan = "#95E6CB";
+          white = "#FFFFFF";
         };
 
         # Options
@@ -209,7 +216,7 @@
 
     git = {
       enable = true;
-      userName  = "coopetal";
+      userName = "coopetal";
       userEmail = "coopetal@proton.me";
 
       extraConfig = {
@@ -231,7 +238,7 @@
     #   enable = true;
     #   # The config.nu can be anywhere you want if you like to edit your Nushell with Nu
     #   configFile.source = ./nushell/config.nu;
-    #   # for editing directly to config.nu 
+    #   # for editing directly to config.nu
     #   extraConfig = ''
     #     let carapace_completer = {|spans|
     #       carapace $spans.0 nushell $spans | from json
@@ -245,14 +252,14 @@
     #         algorithm: "fuzzy"    # prefix or fuzzy
     #         external: {
     #           # set to false to prevent nushell looking into $env.PATH to find more suggestions
-    #           enable: true 
+    #           enable: true
     #           # set to lower can improve completion performance at the cost of omitting some options
-    #           max_results: 100 
-    #           completer: $carapace_completer # check 'carapace_completer' 
+    #           max_results: 100
+    #           completer: $carapace_completer # check 'carapace_completer'
     #         }
     #       }
-    #     } 
-    #     $env.PATH = ($env.PATH | 
+    #     }
+    #     $env.PATH = ($env.PATH |
     #       split row (char esep) |
     #       prepend /home/myuser/.apps |
     #       append /usr/bin/env
@@ -263,12 +270,13 @@
     #     # vim = "hx";
     #     # nano = "hx";
     #   # };
-    # };  
+    # };
 
-    starship = { enable = true;
+    starship = {
+      enable = true;
       settings = {
         add_newline = true;
-        character = { 
+        character = {
           success_symbol = "[➜](bold green)";
           error_symbol = "[➜](bold red)";
         };
