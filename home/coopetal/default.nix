@@ -81,7 +81,7 @@
     nvim-pkg # Personal Neovim configuration using Kickstart-nix.nvim flake template
     python312
     python312Packages.pip
-    qbittorrent
+    # qbittorrent
     ripgrep
     rustup # LunarVim dependency
     unzip # LunarVim dependency
