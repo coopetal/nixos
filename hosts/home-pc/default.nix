@@ -141,6 +141,7 @@
     # hideMounts = true;
     directories = [
       "/etc/ssh"
+      "/var/lib/bluetooth"
       "/var/lib/sops-nix"
       "/var/lib/nixos"
     ];
