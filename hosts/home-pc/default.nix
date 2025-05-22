@@ -209,7 +209,7 @@
   # $ nix search wget
   environment = {
     # TODO: minimise gnome installation
-    gnome.excludePackages = with pkgs.gnome; [
+    gnome.excludePackages = with pkgs; [
       gnome-terminal
       gnome-software
       gnome-music
