@@ -3,7 +3,7 @@
 
   inputs = {
     # Official NixOs Package Sources
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # NixOs hardware optimizations
@@ -11,7 +11,7 @@
 
     # Home-Manager for /home declaration
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       # url = "github:nix-community/home-manager/master";  # Unstable branch
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -145,6 +145,16 @@
             { home-manager.extraSpecialArgs = specialArgs; }
             # Main NixOs configuration file
             ./hosts/home-pc
+          ];
+        };
+        nixos-vm = nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          modules = [
+            # impermanence.nixosModules.impermanence
+            home-manager.nixosModules.home-manager
+            { home-manager.extraSpecialArgs = specialArgs; }
+            # Main NixOs configuration file
+            ./hosts/nixos-vm
           ];
         };
       };

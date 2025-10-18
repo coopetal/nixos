@@ -45,7 +45,7 @@
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
-  home.stateVersion = "24.05"; # Please read the comment before changing.
+  home.stateVersion = "25.05"; # Please read the comment before changing.
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -78,7 +78,7 @@
     lunarvim
     neofetch
     nodejs_22 # LunarVim dependency
-    nvim-pkg # Personal Neovim configuration using Kickstart-nix.nvim flake template
+    # nvim-pkg # Personal Neovim configuration using Kickstart-nix.nvim flake template
     python312
     python312Packages.pip
     python312Packages.ds4drv
