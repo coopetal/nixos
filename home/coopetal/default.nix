@@ -78,7 +78,7 @@
     lunarvim
     neofetch
     nodejs_22 # LunarVim dependency
-    # nvim-pkg # Personal Neovim configuration using Kickstart-nix.nvim flake template
+    nvim-pkg # Personal Neovim configuration using Kickstart-nix.nvim flake template
     python312
     python312Packages.pip
     python312Packages.ds4drv
@@ -123,7 +123,7 @@
   #  /etc/profiles/per-user/chech/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    EDITOR = "lvim"; # Set default editor
+    EDITOR = "nvim"; # Set default editor
   };
 
   # dconf.settings = {
@@ -156,64 +156,62 @@
   programs.home-manager.enable = true;
 
   programs = {
-    alacritty = {
-      enable = true;
-      settings = {
-        # Auy Dark theme
-        colors.primary = {
-          background = "#0A0E14";
-          foreground = "#B3B1AD";
-        };
-        colors.normal = {
-          black = "#01060E";
-          red = "#EA6C73";
-          green = "#91B362";
-          yellow = "#F9AF4F";
-          blue = "#53BDFA";
-          magenta = "#FAE994";
-          cyan = "#90E1C6";
-          white = "#C7C7C7";
-        };
-        colors.bright = {
-          black = "#686868";
-          red = "#F07178";
-          green = "#C2D94C";
-          yellow = "#FFB454";
-          blue = "#59C2FF";
-          magenta = "#FFEE99";
-          cyan = "#95E6CB";
-          white = "#FFFFFF";
-        };
+#   alacritty = {
+#     enable = true;
+#     settings = {
+#       # Auy Dark theme
+#       colors.primary = {
+#         background = "#0A0E14";
+#         foreground = "#B3B1AD";
+#       };
+#       colors.normal = {
+#         black = "#01060E";
+#         red = "#EA6C73";
+#         green = "#91B362";
+#         yellow = "#F9AF4F";
+#         blue = "#53BDFA";
+#         magenta = "#FAE994";
+#         cyan = "#90E1C6";
+#         white = "#C7C7C7";
+#       };
+#       colors.bright = {
+#         black = "#686868";
+#         red = "#F07178";
+#         green = "#C2D94C";
+#         yellow = "#FFB454";
+#         blue = "#59C2FF";
+#         magenta = "#FFEE99";
+#         cyan = "#95E6CB";
+#         white = "#FFFFFF";
+#       };
 
-        # Options
-        font.normal = {
-          family = "MesloLGS Nerd Font";
-        };
-        keyboard.bindings = [
-          {
-            action = "CreateNewWindow";
-            key = "T";
-            mods = "Control | Shift";
-          }
-        ];
-        window = {
-          decorations = "none";
-          opacity = 0.95;
-          title = "Alacritty";
-          decorations_theme_variant = "dark";
-        };
-        window.class = {
-          general = "Alacritty";
-          instance = "Alacritty";
-        };
-        window.padding = {
-          x = 8;
-          y = 8;
-        };
-      };
-    };
-
-    carapace.enable = true;
+#       # Options
+#       font.normal = {
+#         family = "MesloLGS Nerd Font";
+#       };
+#       keyboard.bindings = [
+#         {
+#           action = "CreateNewWindow";
+#           key = "T";
+#           mods = "Control | Shift";
+#         }
+#       ];
+#       window = {
+#         decorations = "none";
+#         opacity = 0.95;
+#         title = "Alacritty";
+#         decorations_theme_variant = "dark";
+#       };
+#       window.class = {
+#         general = "Alacritty";
+#         instance = "Alacritty";
+#       };
+#       window.padding = {
+#         x = 8;
+#         y = 8;
+#       };
+#     };
+#   };
 
     git = {
       enable = true;
@@ -232,74 +230,6 @@
             ];
           };
         };
-      };
-    };
-
-    # nushell = {
-    #   enable = true;
-    #   # The config.nu can be anywhere you want if you like to edit your Nushell with Nu
-    #   configFile.source = ./nushell/config.nu;
-    #   # for editing directly to config.nu
-    #   extraConfig = ''
-    #     let carapace_completer = {|spans|
-    #       carapace $spans.0 nushell $spans | from json
-    #     }
-    #     $env.config = {
-    #       show_banner: false,
-    #       completions: {
-    #         case_sensitive: false # case-sensitive completions
-    #         quick: true    # set to false to prevent auto-selecting completions
-    #         partial: true    # set to false to prevent partial filling of the prompt
-    #         algorithm: "fuzzy"    # prefix or fuzzy
-    #         external: {
-    #           # set to false to prevent nushell looking into $env.PATH to find more suggestions
-    #           enable: true
-    #           # set to lower can improve completion performance at the cost of omitting some options
-    #           max_results: 100
-    #           completer: $carapace_completer # check 'carapace_completer'
-    #         }
-    #       }
-    #     }
-    #     $env.PATH = ($env.PATH |
-    #       split row (char esep) |
-    #       prepend /home/myuser/.apps |
-    #       append /usr/bin/env
-    #     )
-    #   '';
-    #   # shellAliases = {
-    #     # vi = "hx";
-    #     # vim = "hx";
-    #     # nano = "hx";
-    #   # };
-    # };
-
-    starship = {
-      enable = true;
-      settings = {
-        add_newline = true;
-        character = {
-          success_symbol = "[➜](bold green)";
-          error_symbol = "[➜](bold red)";
-        };
-      };
-    };
-
-    zsh = {
-      enable = true;
-      enableCompletion = true;
-      autosuggestion.enable = true;
-      syntaxHighlighting.enable = true;
-      dotDir = "./zsh";
-
-      shellAliases = {
-        cat = "bat";
-        ls = "eza";
-        ll = "eza -lah";
-        update = "sudo nixos-rebuild switch";
-      };
-      history = {
-        size = 10000;
-        path = "${config.xdg.dataHome}/zsh/history";
       };
     };
   };

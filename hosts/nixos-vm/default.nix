@@ -51,22 +51,10 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  hardware.enableAllFirmware = true;
-  nixpkgs.config.allowUnfree = true;
-
-  # Enable Flakes
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-
   networking.hostName = "nixos-vm"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-
-  # Set your time zone.
-  time.timeZone = "Europe/London";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";

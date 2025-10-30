@@ -20,10 +20,10 @@
     impermanence.url = "github:nix-community/impermanence";
 
     # Secrets management tool
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+   #sops-nix = {
+   #  url = "github:Mic92/sops-nix";
+   #  inputs.nixpkgs.follows = "nixpkgs";
+   #};
 
     pre-commit-hooks = {
       url = "github:cachix/git-hooks.nix";
@@ -38,10 +38,10 @@
 
     # Private secrets repo
     # Authenticate via ssh and use shallow clone
-    mysecrets = {
-      url = "git+ssh://git@gitlab.com/coopetal1/nixos-secrets.git?ref=main&shallow=1";
-      flake = false;
-    };
+   #mysecrets = {
+   #  url = "git+ssh://git@gitlab.com/coopetal1/nixos-secrets.git?ref=main&shallow=1";
+   #  flake = false;
+   #};
   };
 
   outputs =
@@ -137,6 +137,16 @@
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
+        alpha = nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          modules = [
+            impermanence.nixosModules.impermanence
+            home-manager.nixosModules.home-manager
+            { home-manager.extraSpecialArgs = specialArgs; }
+            # Main NixOs configuration file
+            ./hosts/alpha
+          ];
+        };
         home-pc = nixpkgs.lib.nixosSystem {
           inherit specialArgs;
           modules = [
