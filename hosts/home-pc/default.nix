@@ -24,8 +24,6 @@
     # Core configuration
     ../common/core
 
-    # Optional configurations
-
     # Users to create
     ../common/users/coopetal
   ];
@@ -91,8 +89,9 @@
 
   # KDE
   services.xserver.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # Limit the number of generations to keep
   boot.loader.systemd-boot.configurationLimit = 10;
