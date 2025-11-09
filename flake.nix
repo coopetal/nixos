@@ -68,7 +68,7 @@
         inherit inputs outputs;
       };
     in
-    {
+    rec {
       # Your custom packages
       # Accessible through 'nix build', 'nix shell', etc
       # packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
@@ -139,7 +139,7 @@
       nixosConfigurations = {
         alpha = nixpkgs.lib.nixosSystem {
           inherit specialArgs;
-          modules = [
+          modules = (builtins.attrValues nixosModules) ++ [
             impermanence.nixosModules.impermanence
             home-manager.nixosModules.home-manager
             { home-manager.extraSpecialArgs = specialArgs; }

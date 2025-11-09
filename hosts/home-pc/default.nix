@@ -72,12 +72,27 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # GNOME
+  # services.xserver.enable = true;
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
+  # # TODO: minimise gnome installation
+  # environment.gnome.excludePackages = with pkgs; [
+  #     gnome-terminal
+  #     gnome-software
+  #     gnome-music
+  #     # gnome-photos
+  #     simple-scan
+  #     totem
+  #     epiphany
+  #     geary
+  #   ];
+
+  # KDE
+  services.xserver.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
 
   # Limit the number of generations to keep
   boot.loader.systemd-boot.configurationLimit = 10;
@@ -186,17 +201,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment = {
-    # TODO: minimise gnome installation
-    gnome.excludePackages = with pkgs; [
-      gnome-terminal
-      gnome-software
-      gnome-music
-      # gnome-photos
-      simple-scan
-      totem
-      epiphany
-      geary
-    ];
     pathsToLink = [ "/share/zsh" ];
     systemPackages = with pkgs; [
       firefox
@@ -208,7 +212,7 @@
       wget
 
       # Gnome Extensions
-      gnomeExtensions.appindicator
+      # gnomeExtensions.appindicator
     ];
   };
 
@@ -248,12 +252,12 @@
   };
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [
-    3389 # Gnome Remote Desktop
-  ];
-  networking.firewall.allowedUDPPorts = [
-    3389 # Gnome Remote Desktop
-  ];
+  # networking.firewall.allowedTCPPorts = [
+  #   3389 # Gnome Remote Desktop
+  # ];
+  # networking.firewall.allowedUDPPorts = [
+  #   3389 # Gnome Remote Desktop
+  # ];
 
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;

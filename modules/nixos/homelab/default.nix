@@ -1,0 +1,24 @@
+{ config, lib, ... }:
+
+let
+  cfg = config.homelab;
+in
+{
+  imports = [
+    ./multimedia.nix
+  ];
+  options.homelab = {
+    domain = lib.mkOption {
+      type = lib.types.str;
+    };
+    storage = lib.mkOption {
+      type = lib.types.str;
+      default = "/data";
+    };
+  };
+  config = {
+    systemd.tmpfiles.rules = [
+      "d ${cfg.storage} - - - - -"
+    ];
+  };
+}
