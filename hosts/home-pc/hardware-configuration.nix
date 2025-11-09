@@ -15,60 +15,56 @@
   boot.supportedFilesystems = [ "btrfs" ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/1686de1a-9068-4b02-99e4-c4865bcd1e46";
+    { device = "/dev/disk/by-uuid/5e58bd3d-1e1e-490b-ab48-53ce7b6786d7";
       fsType = "btrfs";
       options = [ "subvol=root" "compress=zstd" "noatime" ];
     };
 
-  boot.initrd.luks.devices."enc".device = "/dev/disk/by-uuid/75baacfb-1b08-4a0b-923f-46ef1deabfc4";
+  boot.initrd.luks.devices."enc".device = "/dev/disk/by-uuid/ad83fd65-b0ad-41a0-bdcf-c04be6ace013";
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/1686de1a-9068-4b02-99e4-c4865bcd1e46";
+    { device = "/dev/disk/by-uuid/5e58bd3d-1e1e-490b-ab48-53ce7b6786d7";
       fsType = "btrfs";
       options = [ "subvol=home" "compress=zstd" "noatime" ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/1686de1a-9068-4b02-99e4-c4865bcd1e46";
+    { device = "/dev/disk/by-uuid/5e58bd3d-1e1e-490b-ab48-53ce7b6786d7";
       fsType = "btrfs";
       options = [ "subvol=nix" "compress=zstd" "noatime" ];
     };
 
   fileSystems."/persist" =
-    { device = "/dev/disk/by-uuid/1686de1a-9068-4b02-99e4-c4865bcd1e46";
+    { device = "/dev/disk/by-uuid/5e58bd3d-1e1e-490b-ab48-53ce7b6786d7";
       fsType = "btrfs";
       options = [ "subvol=persist" "compress=zstd" "noatime" ];
       neededForBoot = true;
     };
 
   fileSystems."/var/log" =
-    { device = "/dev/disk/by-uuid/1686de1a-9068-4b02-99e4-c4865bcd1e46";
+    { device = "/dev/disk/by-uuid/5e58bd3d-1e1e-490b-ab48-53ce7b6786d7";
       fsType = "btrfs";
       options = [ "subvol=log" "compress=zstd" "noatime" ];
       neededForBoot = true;
     };
 
-  fileSystems."/swap" =
-    { device = "/dev/disk/by-uuid/1686de1a-9068-4b02-99e4-c4865bcd1e46";
-      fsType = "btrfs";
-      options = [ "subvol=swap" ];
-    };
-
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/6B73-E2E3";
+    { device = "/dev/disk/by-uuid/A402-08E0";
       fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
+      options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  swapDevices = [ { device = "/swap/swapfile"; } ];
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/7666baf1-0101-4283-b140-b4c606d5823a"; }
+    ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  # networking.useDHCP = lib.mkDefault true;
-  networking.interfaces.enp9s0.useDHCP = lib.mkDefault true;
-  networking.interfaces.wlp7s0.useDHCP = lib.mkDefault true;
+  networking.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp9s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp7s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

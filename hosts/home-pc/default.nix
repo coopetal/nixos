@@ -246,7 +246,7 @@
       ports = [ 22 ];
       settings = {
         PasswordAuthentication = true;
-        AllowUsers = null; # Allows all users by default. Can be [ "user1" "user2" ]
+        # AllowUsers = null; # Allows all users by default. Can be [ "user1" "user2" ]
         UseDns = true;
         X11Forwarding = false;
         PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
@@ -287,6 +287,6 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "25.05"; # Did you read the comment?
 
 }
