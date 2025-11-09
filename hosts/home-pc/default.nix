@@ -204,8 +204,6 @@
     pathsToLink = [ "/share/zsh" ];
     systemPackages = with pkgs; [
       firefox
-      meslo-lgs-nf
-      nerdfonts
       sops
       tree
       vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
@@ -215,6 +213,11 @@
       # gnomeExtensions.appindicator
     ];
   };
+
+  fonts.packages = with pkgs; [
+    nerd-fonts.meslo-lg
+    nerd-fonts.fira-code
+  ];
 
   programs = {
     # neovim = {
