@@ -51,13 +51,14 @@
   };
 
   homelab = {
-    domain = "alpha.local";
+    domain = "local";
     storage = "/data";
     multimedia = {
       enable = true;
       # deluge.interface = "wg1";
       # deluge.interface = "ens18";
     };
+    traefik.enable = true;
   };
 
   # environment.systemPackages = with pkgs; [

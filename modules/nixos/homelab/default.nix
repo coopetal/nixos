@@ -6,6 +6,7 @@ in
 {
   imports = [
     ./multimedia.nix
+    ./traefik.nix
   ];
   options.homelab = {
     domain = lib.mkOption {

@@ -29,19 +29,19 @@ in
       "d ${config.homelab.storage}/Media 2750 multimedia multimedia - -"
     ];
 
-    # homelab.traefik = {
-    #   enable = true;
-    #   services = {
-    #     jellyfin.port = 8096;
-    #     bazarr.port = config.services.bazarr.listenPort; # Default: 6767
-    #     radarr.port = 7878;
-    #     sonarr.port = 8989;
-    #     lidarr.port = 8686;
-    #     readarr.port = 8787;
-    #     prowlarr.port = 9696;
-    #     # deluge.port = config.services.deluge.web.port; # Default: 8112
-    #   };
-    # };
+    homelab.traefik = {
+      enable = true;
+      services = {
+        jellyfin.port = 8096;
+        bazarr.port = config.services.bazarr.listenPort; # Default: 6767
+        radarr.port = 7878;
+        sonarr.port = 8989;
+        lidarr.port = 8686;
+        readarr.port = 8787;
+        prowlarr.port = 9696;
+        # deluge.port = config.services.deluge.web.port; # Default: 8112
+      };
+    };
 
     services = {
       jellyfin = {
