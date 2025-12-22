@@ -44,16 +44,16 @@
   networking.networkmanager.enable = true;
 
   # Disable NetworkManager's internal DNS resolution
-  networking.networkmanager.dns = "none";
+  # networking.networkmanager.dns = "none";
   # These options are unnecessary when managing DNS ourselves
-  networking.useDHCP = false;
-  networking.dhcpcd.enable = false;
+  # networking.useDHCP = false;
+  # networking.dhcpcd.enable = false;
   # Configure DNS servers manually
   # IPv6 DNS servers can be used here as well.
-  networking.networkmanager.insertNameservers = [
-    "9.9.9.9"
-    "149.112.112.112"
-  ];
+  # networking.networkmanager.insertNameservers = [
+  #   "9.9.9.9"
+  #   "149.112.112.112"
+  # ];
 
   environment.systemPackages = with pkgs; [
     git

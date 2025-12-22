@@ -14,48 +14,52 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/06c1c794-5d3c-41dc-b41a-955883c235fb";
+    { device = "/dev/disk/by-uuid/8c46bcde-de3a-4eb5-93ee-bcfd271748c7";
       fsType = "btrfs";
       options = [ "subvol=root" "compress=zstd" "noatime" ];
     };
 
+  boot.initrd.luks.devices."enc".device = "/dev/disk/by-uuid/60ac191e-3d59-4278-979d-897f48ac04ee";
+
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/06c1c794-5d3c-41dc-b41a-955883c235fb";
+    { device = "/dev/disk/by-uuid/8c46bcde-de3a-4eb5-93ee-bcfd271748c7";
       fsType = "btrfs";
       options = [ "subvol=home" "compress=zstd" "noatime" ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/06c1c794-5d3c-41dc-b41a-955883c235fb";
+    { device = "/dev/disk/by-uuid/8c46bcde-de3a-4eb5-93ee-bcfd271748c7";
       fsType = "btrfs";
       options = [ "subvol=nix" "compress=zstd" "noatime" ];
     };
 
   fileSystems."/persist" =
-    { device = "/dev/disk/by-uuid/06c1c794-5d3c-41dc-b41a-955883c235fb";
+    { device = "/dev/disk/by-uuid/8c46bcde-de3a-4eb5-93ee-bcfd271748c7";
       fsType = "btrfs";
       options = [ "subvol=persist" "compress=zstd" "noatime" ];
     };
 
   fileSystems."/var/log" =
-    { device = "/dev/disk/by-uuid/06c1c794-5d3c-41dc-b41a-955883c235fb";
+    { device = "/dev/disk/by-uuid/8c46bcde-de3a-4eb5-93ee-bcfd271748c7";
       fsType = "btrfs";
       options = [ "subvol=log" "compress=zstd" "noatime" ];
       neededForBoot = true;
     };
 
   fileSystems."/data" = 
-    { device = "/dev/sdb1";
+    { device = "/dev/disk/by-uuid/18aa8f30-6761-438f-aefc-80560d4aa3b5";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/DFE2-A21C";
+    { device = "/dev/disk/by-uuid/2466-4D91";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  swapDevices = [ ];
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/30f23e69-77fb-4175-be6b-f1a5a8c46ad3"; }
+    ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

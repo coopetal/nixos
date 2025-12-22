@@ -48,6 +48,8 @@ in
         enable = true;
         user = "multimedia";
         group = "multimedia";
+        dataDir = "${config.homelab.storage}/service_data/jellyfin";
+        cacheDir = "${config.homelab.storage}/service_data/cache/jellyfin";
         openFirewall = true;
       };
 
@@ -55,49 +57,53 @@ in
         enable = true;
         user = "multimedia";
         group = "multimedia";
+        dataDir = "${config.homelab.storage}/service_data/bazarr";
         openFirewall = true;
       };
       radarr = {
         enable = true;
         user = "multimedia";
         group = "multimedia";
+        dataDir = "${config.homelab.storage}/service_data/radarr";
         openFirewall = true;
-        # dataDir = "${config.homelab.storage}/service_data/radarr";
       };
       sonarr = {
         enable = true;
         user = "multimedia";
         group = "multimedia";
-        openFirewall = true;
-        # dataDir = "${config.homelab.storage}/service_data/sonarr";
-      };
-      lidarr = {
-        enable = true;
-        user = "multimedia";
-        group = "multimedia";
-        openFirewall = true;
-        # dataDir = "${config.homelab.storage}/service_data/lidarr";
-      };
-      readarr = {
-        enable = true;
-        user = "multimedia";
-        group = "multimedia";
+        dataDir = "${config.homelab.storage}/service_data/sonarr";
         openFirewall = true;
       };
+      # lidarr = {
+      #   enable = true;
+      #   user = "multimedia";
+      #   group = "multimedia";
+      #   openFirewall = true;
+      #   # dataDir = "${config.homelab.storage}/service_data/lidarr";
+      # };
+      # readarr = {
+      #   enable = true;
+      #   user = "multimedia";
+      #   group = "multimedia";
+      #   openFirewall = true;
+      # };
       prowlarr = {
         enable = true;
+        dataDir = "${config.homelab.storage}/service_data/prowlarr";
         openFirewall = true;
       };
       transmission = {
         enable = true;
         user = "multimedia";
         group = "multimedia";
+        package = pkgs.transmission_4;
         openFirewall = true;
         openRPCPort = true; # Open firewall for RPC
         settings = {
           download-dir = "${config.homelab.storage}/Media/Torrent";
+          incomplete-dir = "${config.homelab.storage}/Media/Torrent/Incomplete";
           rpc-bind-address = "0.0.0.0"; #Bind to own IP
-          rpc-whitelist = "127.0.0.1,192.168.0.18"; # Whitelist your remote machine
+          rpc-whitelist = "127.0.0.1,10.0.0.20,10.0.0.21,10.0.0.22"; # Whitelist your remote machine
         };
       };
     };
