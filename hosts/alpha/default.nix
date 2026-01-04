@@ -53,12 +53,28 @@
   homelab = {
     domain = "local";
     storage = "/data";
-    multimedia = {
+    safeStorage = "/data/safe";
+    immich.enable = true;
+    multimedia.enable = true;
+    # redis = {
+    #   enable = true;
+    #   databases = 1;
+    #   # Databases:
+    #   # 0: Immich
+    # };
+    # postgresql = {
+    #   enable = true;
+    #   package = pkgs.postgresql_18;
+    # };
+    traefik = {
       enable = true;
-      # deluge.interface = "wg1";
-      # deluge.interface = "ens18";
+      services = {
+        "gmktec01.pve" = { host = "10.0.0.10"; port = 8006; };
+        "node.pve" = { host = "10.0.0.11"; port = 8006; };
+        homeassistant = { host = "10.0.0.23"; port = 8123; };
+        zigbee2mqtt = { host = "10.0.0.51"; port = 9442; };
+      };
     };
-    traefik.enable = true;
   };
 
   # environment.systemPackages = with pkgs; [

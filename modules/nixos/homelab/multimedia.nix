@@ -36,10 +36,8 @@ in
         bazarr.port = config.services.bazarr.listenPort; # Default: 6767
         radarr.port = 7878;
         sonarr.port = 8989;
-        lidarr.port = 8686;
-        readarr.port = 8787;
         prowlarr.port = 9696;
-        # deluge.port = config.services.deluge.web.port; # Default: 8112
+        transmission.port = 9091;
       };
     };
 
@@ -74,19 +72,6 @@ in
         dataDir = "${config.homelab.storage}/service_data/sonarr";
         openFirewall = true;
       };
-      # lidarr = {
-      #   enable = true;
-      #   user = "multimedia";
-      #   group = "multimedia";
-      #   openFirewall = true;
-      #   # dataDir = "${config.homelab.storage}/service_data/lidarr";
-      # };
-      # readarr = {
-      #   enable = true;
-      #   user = "multimedia";
-      #   group = "multimedia";
-      #   openFirewall = true;
-      # };
       prowlarr = {
         enable = true;
         dataDir = "${config.homelab.storage}/service_data/prowlarr";
@@ -102,8 +87,10 @@ in
         settings = {
           download-dir = "${config.homelab.storage}/Media/Torrent";
           incomplete-dir = "${config.homelab.storage}/Media/Torrent/Incomplete";
-          rpc-bind-address = "0.0.0.0"; #Bind to own IP
+          rpc-bind-address = "0.0.0.0"; # Bind to own IP
           rpc-whitelist = "127.0.0.1,10.0.0.20,10.0.0.21,10.0.0.22"; # Whitelist your remote machine
+          rpc-host-whitelist-enabled = true;
+          rpc-host-whitelist = "transmission.local,localhost";
         };
       };
     };

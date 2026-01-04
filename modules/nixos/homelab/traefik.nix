@@ -118,6 +118,11 @@ in
               checknewversion = false;
               sendanonymoususage = false;
             };
+            entryPoints.web.transport.respondingTimeouts = {
+              readTimeout = "300s";
+              writeTimeout = "300s";
+              idleTimeout = "300s";
+            };
           }
           (lib.mkIf hasTLS {
             entryPoints = {
@@ -138,7 +143,7 @@ in
             certificatesResolvers = {
               cloudflare = {
                 acme = {
-                  email = "michal@mieszczak.com.pl";
+                  email = "";
                   storage = "${config.services.traefik.dataDir}/acme.json";
                   dnsChallenge = {
                     provider = "cloudflare";

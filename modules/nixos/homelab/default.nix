@@ -5,6 +5,7 @@ let
 in
 {
   imports = [
+    ./immich.nix
     ./multimedia.nix
     ./traefik.nix
   ];
@@ -15,6 +16,10 @@ in
     storage = lib.mkOption {
       type = lib.types.str;
       default = "/data";
+    };
+    safeStorage = lib.mkOption {
+      type = lib.types.str;
+      default = "/safe";
     };
   };
   config = {
