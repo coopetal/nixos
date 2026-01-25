@@ -69,6 +69,7 @@
 
     bat
     eza
+    darktable
     fd
     fzf
     # git-crypt
