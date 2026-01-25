@@ -216,10 +216,11 @@
 
     git = {
       enable = true;
-      userName = "coopetal";
-      userEmail = "coopetal@proton.me";
-
-      extraConfig = {
+      settings = {
+        user = {
+          name = "coopetal";
+          email = "coopetal@proton.me";
+        };
         init = {
           defaultBranch = "main";
         };

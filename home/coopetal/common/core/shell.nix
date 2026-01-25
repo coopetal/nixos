@@ -209,7 +209,7 @@
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
-      dotDir = "./zsh";
+      dotDir = "${config.xdg.configHome}/zsh";
 
       shellAliases = {
         cat = "bat";
