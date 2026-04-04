@@ -13,7 +13,7 @@
     shell = pkgs.zsh;  # Default shell
     extraGroups = [
       "wheel"
-    ]  # TODO: add the conditional groups
+    # ]  # TODO: add the conditional groups
     # ++ ifTheyExist [
       "audio"
       "video"
