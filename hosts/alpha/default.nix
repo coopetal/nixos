@@ -51,7 +51,7 @@
   };
 
   homelab = {
-    domain = "local";
+    domain = "home";
     storage = "/data";
     safeStorage = "/data/safe";
     immich.enable = true;

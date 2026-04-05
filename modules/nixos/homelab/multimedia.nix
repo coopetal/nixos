@@ -90,7 +90,7 @@ in
           rpc-bind-address = "0.0.0.0"; # Bind to own IP
           rpc-whitelist = "127.0.0.1,10.0.0.20,10.0.0.21,10.0.0.22"; # Whitelist your remote machine
           rpc-host-whitelist-enabled = true;
-          rpc-host-whitelist = "transmission.local,localhost";
+          rpc-host-whitelist = "transmission.home,localhost";
         };
       };
     };
