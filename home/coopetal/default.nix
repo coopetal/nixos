@@ -73,10 +73,10 @@
     fd
     fzf
     # git-crypt
-    gnumake # LunarVim dependency
     # gnupg
     just
-    lunarvim
+    lsfg-vk
+    lsfg-vk-ui
     neofetch
     nodejs_22
     nvim-pkg # Personal Neovim configuration using Kickstart-nix.nvim flake template
@@ -87,6 +87,7 @@
     ripgrep
     rustup
     unzip
+    zoxide
 
     # Fonts
     # jetbrains-mono
