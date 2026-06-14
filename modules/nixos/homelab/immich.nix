@@ -30,10 +30,6 @@ in
         openFirewall = true;
         mediaLocation = immichStorage;
         accelerationDevices = [ "/dev/dri/card0" ];
-        database = {
-          enableVectorChord = true;
-          enableVectors = false;
-        };
         # settings = {  # TODO: set up declarative settings
           # backup.database.enabled = false;  # TODO: create external DB Backup
           # newVersionCheck.enabled = false;
