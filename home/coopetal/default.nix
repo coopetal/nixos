@@ -77,7 +77,6 @@
     just
     lsfg-vk
     lsfg-vk-ui
-    neofetch
     nodejs_22
     nvim-pkg # Personal Neovim configuration using Kickstart-nix.nvim flake template
     python312
