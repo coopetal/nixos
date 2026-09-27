@@ -1,4 +1,4 @@
-{ config, lib, pkgs, options, ... }:
+{ config, lib, pkgs, pkgsUnstable, options, ... }:
 
 let
   hl = config.homelab;
@@ -26,6 +26,7 @@ in
     services = {
       immich = {
         enable = true;
+        package = pkgsUnstable.immich;
         host = "0.0.0.0";
         openFirewall = true;
         mediaLocation = immichStorage;

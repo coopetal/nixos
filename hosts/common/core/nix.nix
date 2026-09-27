@@ -1,4 +1,4 @@
-{ inputs, outputs, lib, ... }:
+{ inputs, outputs, pkgs, pkgsUnstable, config, lib, ... }:
 
 {
   # Enable Flakes
@@ -12,6 +12,11 @@
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 1w";
+  };
+
+  _module.args.pkgsUnstable = import inputs.nixpkgs-unstable {
+    inherit (pkgs.stdenv.hostPlatform) system;
+    inherit (config.nixpkgs) config;
   };
 
   security.sudo.extraConfig = ''
