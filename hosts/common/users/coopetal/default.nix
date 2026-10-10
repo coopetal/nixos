@@ -43,7 +43,7 @@
 
   # Import this user's personal/home configurations
   home-manager.users.coopetal = import (
-    # "../../../../home/coopetal/${config.networking.hostName}.nix"  # TODO: Change home default.nix to a <host-name>.nix file
-    ../../../../home/coopetal
+    ./. + "../../../../../home/coopetal/${config.networking.hostName}.nix"  # TODO: Change home default.nix to a <host-name>.nix file
+    # ../../../../home/coopetal
   );
 }
