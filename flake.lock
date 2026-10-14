@@ -392,11 +392,11 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1791993018,
-        "narHash": "sha256-uRt42VYG193BMfPe223q299ccsgvbvNFEJfu6WULucI=",
+        "lastModified": 1791995895,
+        "narHash": "sha256-MHjJhFO/UYBKVFkCaPeedmQ/HNJ/ohW/ggBAi9mTiXg=",
         "owner": "coopetal",
         "repo": "kickstart-nix.nvim",
-        "rev": "95baf63781b96adf3e6d2df1d628a5963ff96012",
+        "rev": "080bf3ebd61f55a807a041d550f493ebf7549988",
         "type": "github"
       },
       "original": {
