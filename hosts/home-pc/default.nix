@@ -250,9 +250,8 @@
 
   # List services that you want to enable:
 
-  # Enable the OpenSSH daemon.
   services = {
-    flatpak.enable = true;
+    # flatpak.enable = true;
     openssh = {
       enable = true;
       ports = [ 22 ];
@@ -263,6 +262,12 @@
         X11Forwarding = false;
         PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
       };
+    };
+    sunshine = {
+      enable = true;
+      autoStart = true;
+      capSysAdmin = true; # Needed for Wayland, need to prepend every command with 'sudo -u <username>'
+      openFirewall = true;
     };
   };
 
